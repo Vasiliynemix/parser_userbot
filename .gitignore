@@ -127,3 +127,4 @@ dmypy.jsona
 logs/
 
 authorized_key_yandex.json
+config.py

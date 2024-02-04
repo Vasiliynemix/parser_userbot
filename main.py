@@ -13,19 +13,19 @@ from database import create_conn, get, new, TypeFeedback
 from pkg.logger import Logger
 
 
-# app = Client(
-#     name="my_account",
-#     api_id=api_id,
-#     api_hash=api_hash,
-#     phone_number=phone_number,
-# )
+app = Client(
+    name="my_account",
+    api_id=api_id,
+    api_hash=api_hash,
+    phone_number=phone_number,
+)
 
-# for chat_name in chat_name_list:
-#     with app:
-#         try:
-#             app.join_chat(chat_name)
-#         except Exception as e:
-#             logger.error(f"Не удалось присоединиться к чату {chat_name}: {e}")
+for chat_name in chat_name_list:
+    with app:
+        try:
+            app.join_chat(chat_name)
+        except Exception as e:
+            logger.error(f"Не удалось присоединиться к чату {chat_name}: {e}")
 
 
 async def get_history(app):
@@ -35,13 +35,13 @@ async def get_history(app):
             await parse_comment(message.text, pool)
 
 
-# @app.on_message()
-# async def my_handler(client, message):
-#     chat: Chat = message.chat
-#     if chat.username not in chat_name_list:
-#         return
-#     logger.info(f"Message from {chat.username}: {message.text}")
-#     await parse_comment(message.text)
+@app.on_message()
+async def my_handler(client, message):
+    chat: Chat = message.chat
+    if chat.username not in chat_name_list:
+        return
+    logger.info(f"Message from {chat.username}: {message.text}")
+    await parse_comment(message.text)
 
 
 async def parse_comment(text, pool=None):
@@ -94,24 +94,24 @@ async def parse_description_by_text(text):
     return text
 
 
-async def main():
-    async with Client(
-            name="prima_acc",
-            api_id=api_id,
-            api_hash=api_hash,
-            phone_number=phone_number,
-    ) as app:
-        await get_history(app)
+# async def main():
+#     async with Client(
+#             name="prima_acc",
+#             api_id=api_id,
+#             api_hash=api_hash,
+#             phone_number=phone_number,
+#     ) as app:
+#         await get_history(app)
 
 
 if __name__ == '__main__':
     log = Logger(
-        log_level="debug",
+        log_level="info",
         log_dir_name="logs",
         info_log_path="logs/info.log",
         debug_log_path="logs/debug.log",
     )
     log.setup_logger()
     logger.debug("Debug mode is on")
-    asyncio.run(main())
-    # app.run()
+    # asyncio.run(main())
+    app.run()
