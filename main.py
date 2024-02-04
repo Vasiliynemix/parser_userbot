@@ -113,5 +113,6 @@ if __name__ == '__main__':
     )
     log.setup_logger()
     logger.debug("Debug mode is on")
+    logger.info("Starting...")
     # asyncio.run(main())
     app.run()
