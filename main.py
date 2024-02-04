@@ -106,7 +106,7 @@ async def parse_description_by_text(text):
 
 if __name__ == '__main__':
     log = Logger(
-        log_level="debug",
+        log_level="info",
         log_dir_name="logs",
         info_log_path="logs/info.log",
         debug_log_path="logs/debug.log",
